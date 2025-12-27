@@ -1,2 +1,398 @@
 # Portfolio.Louis.Chiron
 Portfolio deLouis Chiron
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Louis Chiron - Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .logo { font-size: 1.5rem; font-weight: 700; color: #2c3e50; }
+        
+        nav a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: #3498db; }
+        
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: #2c3e50 url('') center/cover;
+            color: white;
+        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 300; }
+        .hero p { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9; }
+        
+        .btn {
+            background: rgba(255,255,255,0.2);
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+        .btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+        
+        /* Sections */
+        section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
+        h2 { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #2c3e50; font-weight: 300; }
+        
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #2c3e50; font-weight: 300; }
+        
+        /* About */
+        .about {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        /* Gallery Grid - Style alternatif */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            background: #ddd;
+            border-radius: 15px;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .gallery-item:hover { 
+            transform: translateY(-8px) scale(1.02); 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* Vidéos */
+        .video-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            justify-items: center;
+        }
+        .video-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 360px;
+        }
+        .video-card .gallery-item {
+            background: #111;
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .video-card .gallery-item img { width: 100%; height: 100%; object-fit: cover; display:block; }
+        .video-btn {
+            display: inline-block;
+            margin-top: 6px;
+            background: white;
+            color: #2c3e50;
+            padding: 10px 26px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .video-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.18); }
+        /* Sites Web */
+        .site-card { display:flex; flex-direction:column; align-items:center; gap:10px; width:100%; max-width:360px; }
+        .site-card .gallery-item { width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; }
+        .site-card .gallery-item img{ width:100%; height:100%; object-fit:cover; display:block; }
+        .site-btn { background:white; color:#2c3e50; padding:10px 22px; border-radius:999px; text-decoration:none; font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,0.12); }
+        .site-btn:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,0.18); }
+        
+        /* Section Galerie spéciale */
+        .gallery-section {
+            background: #2c3e50;
+            padding: 5rem 5%;
+            max-width: 100%;
+            margin: 2rem 0;
+        }
+        .gallery-section .section-title { color: white; }
+        .gallery-section .intro {
+            color: rgba(255,255,255,0.95);
+            text-align: center;
+            margin: 0 auto 1.5rem auto;
+            max-width: 900px;
+            font-size: 1.05rem;
+            line-height: 1.4;
+        }
+        .gallery-section .gallery-grid .gallery-item { display: flex; flex-direction: column; align-items: center; }
+        .gallery-section .gallery-caption { text-align: center; padding: 0.6rem 0; color: white; font-size: 0.95rem; }
+        
+        /* Catégories */
+        .category { margin: 3rem 0; }
+        .category h3 {
+            font-size: 1.8rem;
+            color: #34495e;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 4px solid #3498db;
+        }
+        
+        /* Contact */
+        .contact {
+            background: #34495e;
+            color: white;
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+        }
+        .contact p { font-size: 1.2rem; margin: 1rem 0; }
+        
+        /* Footer */
+        footer { background: #2c3e50; color: white; text-align: center; padding: 2rem; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            nav a { margin-left: 1rem; font-size: 0.9rem; }
+            section { padding: 3rem 5%; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+            .video-gallery .gallery-item { max-width: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Louis Chiron</div>
+        <nav>
+            <a href="#photo">Photos</a>
+            <a href="#affiches">Affiches</a>
+            <a href="#videos">Vidéos</a>
+            <a href="#sites">Sites Web</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Louis Chiron</h1>
+        <p>Portfolio</p>
+        <a href="#about" class="btn">Découvrir mon travail</a>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="about">
+            <h2>À propos</h2>
+            <p>Je m’appelle Louis Chiron, étudiant en STI2D passionné par la création visuelle et numérique. Photographe avant tout, je développe mes compétences à travers l’image et j’explore progressivement la vidéo, le design graphique et le développement web, avec un intérêt particulier pour le sport, le portrait et la nature.</p>
+         
+                 <p>Ce portfolio présente une sélection de mes travaux les plus représentatifs et a été entièrement conçu et réalisé par mes soins. Je suis constamment à la recherche de nouvelles collaborations pour progresser et enrichir mon expérience.</p>
+        </div>
+    </section>
+
+    
+
+    <!-- Photography -->
+    <section id="photo">
+        <h2>Photographie</h2>
+        
+        <div class="category">
+            <h3>Sport</h3>
+            <div class="gallery">
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/12e70eb4-99ce-414d-9728-3448581ed3ed-dsc_2827_jpe?asset_id=b39da2ee-f55a-4877-a4fd-6133e8eac9fc&img_etag=%22225aa227431045d58fb405f6ab310025%22&image_assets=false&size=3842" alt="Sport 1"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/672f7b93-8aaf-4e77-98cf-a54f71b3096e-dsc_3735_jpe?asset_id=9782bd56-9962-4ad0-a4f6-b59954b18464&img_etag=%22d63d458c8eb740f8bf0b510197a5e1dd%22&image_assets=false&size=3842" alt="Sport 2"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/8889f02b-df70-4383-a078-555583857740-dsc_3922_jpe?asset_id=6d1a0258-4316-40f3-a3a7-16240d9e255b&img_etag=%22bedd6b7db7ae496690b5085676ad68ec%22&image_assets=false&size=3842" alt="Sport 3"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/9af93eee-ddcc-4432-a696-cfacf3a4fb8b-dsc_1122_jpe?asset_id=16f3ac77-5d3c-4d8e-bee1-41294983e0d1&img_etag=%224ac52acc59084d519bcb41ab11353a29%22&image_assets=false&size=2560" alt="Sport 4"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/80a534c4-b383-47bc-94e3-3bd8fe796e65-dsc_3314_jpe?asset_id=5fbc2d55-7a1b-413b-ab0c-2ac95b816c4a&img_etag=%22c67a9f232e974534be4df2106d779917%22&image_assets=false&size=1024" alt="Sport 5"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/TsLCb6f4qSFm9/resources/a3dcdfc3-bcf8-4ed3-a63d-9b52ad2aa446-dsc_0966_jpe?asset_id=cb5a899f-2155-488e-89e8-82f3e3c325b4&img_etag=%2226eddea80dcd45ddb9312c65886ecdca%22&image_assets=false&size=2560" alt="Sport 6"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/f14383e5-d3eb-4afe-b808-299faf6ec92b-dsc_0277_jpe?asset_id=d3a54ffe-50d5-4e6c-8777-540742f61c93&img_etag=%22cf7ad9cd7b0c431cb6418abd8375dd2d%22&image_assets=false&size=2560" alt="Sport 7"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/70e6736f-b72f-450e-9bb4-a3b3e2657c6f-dsc_0338_jpe?asset_id=4801f81a-91f7-4b3c-879b-dd5cb6b824aa&img_etag=%223ca8596a5ee94e23b1d242a3c98aa039%22&image_assets=false&size=2560" alt="Sport 8"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/77717cad-1746-49ab-be4f-21567c7205fb-img_0966_jpe?asset_id=aa2a9a49-e90e-47f2-827f-5bbc7301b2b4&img_etag=%2271e3fd753bce4886949f9751e0608e4e%22&image_assets=false&size=2560" alt="Sport 9"></div>
+                
+            </div>
+        </div>
+
+        <div class="category">
+            <h3>Rue</h3>
+            <div class="gallery">
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/9aed1e22-221d-4a87-aea5-a866be6d27af-dsc_0867_jpe?asset_id=b2036b74-0872-452f-9da0-bb4218dc160c&img_etag=%220c3fb4ee64464c4b958f2a522d344cd9%22&image_assets=false&size=3842" alt="Rue 1"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/f1deb204-d4f4-4a10-a6b3-e4f8cee7312b-dsc_0934_jpe?asset_id=36d2efa7-2f6c-473f-b2bc-410145ba3a05&img_etag=%22db7e1a4dad5c498f9b2068c29bfaf32e%22&image_assets=false&size=3842" alt="Rue 2"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/479ad5c7-d7e6-472e-b0ed-d2df5c1a7b26-dsc_1174_jpe?asset_id=eecc5ddc-1bdf-43f6-8ed8-bb51f35656e0&img_etag=%222467079596584ba8b37421f69cb1d850%22&image_assets=false&size=3842" alt="Rue 3"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/1d2048ac-4c2a-4773-9de9-35c9437c0d91-dsc_1357_jpe?asset_id=bea43158-8c32-4f89-a42c-2165845a163b&img_etag=%22473cae8656d84251a959090ccbf3a7a2%22&image_assets=false&size=3842" alt="Rue 4"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/426ff9a7-5a80-46e1-9a1c-2ca50026a394-dsc_1898_jpe?asset_id=6c77d8f3-3e3c-427e-a0d6-8c3f5ab73c71&img_etag=%2262460c9c86d54c798ebf64efa6a3911f%22&image_assets=false&size=3842" alt="Rue 5"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/9cf2ef5c-13fb-4ab2-b68a-6a29b00868db-dsc_1806_jpe?asset_id=668cd81b-4d88-4f92-8344-3271feed2fff&img_etag=%22f4abe34d4bf9483c9b3a178af2e10fdf%22&image_assets=false&size=3842" alt="Rue 6"></div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h3>Militaires</h3>
+            <div class="gallery">
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/4b2fd696-ef68-4697-9ea7-5cde63e8ff66-dsc_8614_jpe?asset_id=0b367f20-8a09-417b-ac91-f6faad97e09d&img_etag=%227f0429c5fb214083986f0dae34e4b8c4%22&image_assets=false&size=1024" alt="Militaire 1"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/3a5fa031-5397-4feb-a91e-b6d164765000-dsc_8636_jpe?asset_id=6b226b78-9676-467c-b776-3bdca389f3b7&img_etag=%22ccb46923f3a54babaf95f0c5a75975f9%22&image_assets=false&size=1024" alt="Militaire 2"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/ee3091a2-2dbf-4244-b841-553151a38a76-dsc_8817_jpe?asset_id=c243896b-fdb5-4a17-9829-578595f65b9f&img_etag=%22a789793c59b542c59d06660bee4eb898%22&image_assets=false&size=1024" alt="Militaire 3"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/31731974-5324-4f1b-bdda-fd0dac4f879e-dsc_9270_jpe?asset_id=6c480bac-432d-4946-aa7f-048c74c64715&img_etag=%2272550e942581414bacbb841e5a1e2b60%22&image_assets=false&size=1024" alt="Militaire 4"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/TsLCb6f4qSFm9/resources/36222351-f00d-4943-8293-9637c15042fa-img_3823_jpe?asset_id=302d7fbf-e8a5-441a-8dc8-5eb5ffa9f441&img_etag=%22c8f528c15bad4bf0915a680aded78fa1%22&image_assets=false&size=3842" alt="Militaire 5"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/TsLCb6f4qSFm9/resources/f0c439c3-9732-46d0-a04a-7ca3363901c4-img_3824_jpe?asset_id=c058d8e9-825f-492a-a4fa-228bcd7acb07&img_etag=%22a6b58b3db80343488f2e962323ec0ee3%22&image_assets=false&size=3839" alt="Militaire 6"></div>
+                
+                
+            </div>
+        </div>
+
+        
+            </div>
+        </div>
+
+        <div class="category">
+            <h3>Montagne</h3>
+            <div class="gallery">
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/ecdfb620-6b28-47bf-b818-56fbd7596845-dsc_9705_jpe?asset_id=5bd7cd41-80f5-4c49-820d-7d456b93f1c7&img_etag=%225aab6349dbdb43ee84efec45348267fe%22&image_assets=false&size=1024" alt="Montagne 1"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/ed41e426-6fc8-4339-9481-01dd50e87ed9-dsc_9823_jpe?asset_id=76b91c9e-b929-4f15-b99c-61d46264b511&img_etag=%22cb84218f354549b7a7d9d633794ae2e7%22&image_assets=false&size=1024" alt="Montagne 2"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/eafab003-c841-4025-a6f2-febe01f77d90-dsc_9779_jpe?asset_id=ba5cbb95-6d45-482f-99db-91a51a3fd337&img_etag=%22be1cc92936c74de384d0b8d54a47f539%22&image_assets=false&size=1024" alt="Montagne 3"></div>
+              
+            </div>
+        </div>
+        
+        <div class="category">
+            <h3>Animaux</h3>
+            <div class="gallery">
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/4d1d6de9-d491-445d-961d-3c392c6b6792-dsc_8293_jpe?asset_id=f10fd80b-c234-48eb-a607-033ebf84bc83&img_etag=%22397f14a28195474eb2d2ed47e8a56fc0%22&image_assets=false&size=3842" alt="Animaux 1"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/c9deb7ef-5baf-4c2f-a527-3949cfae78a6-dsc_8362_jpe?asset_id=dd3dc153-a945-42e5-baec-326d839f58f8&img_etag=%22a812306c91d144e38d2fa00f2e2e733c%22&image_assets=false&size=3842" alt="Animaux 2"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/adfbe12b-4a13-48d6-bb19-9e834db2ac0c-dsc_7899_jpe?asset_id=041a3689-7fc5-4f0d-a6c0-505ca91d060f&img_etag=%22c8c1e27e3513459f8f4e7876d2616067%22&image_assets=false&size=3332" alt="Animaux 3"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/43e25bdb-fcce-43af-b70b-33c7895e45f0-dsc_7937_jpe?asset_id=a549adad-bbc5-4486-aeea-850b6ec5cf37&img_etag=%2257ffec30445a4af5b21f5eaa8342f8fa%22&image_assets=false&size=3842" alt="Animaux 4"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/2abc5811-6379-41b9-94d1-6c8464341af7-dsc_7910_jpe?asset_id=d66ceb89-930d-4b98-a7e0-b9fee787e01c&img_etag=%226167d4689c194643baff2a35c1c7df81%22&image_assets=false&size=3842" alt="Animaux 5"></div>
+                <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/JO0KPUQ1MnxN3/resources/2ddaa874-5b12-4847-81af-b185c52e5e68-dsc_7932_jpe?asset_id=ad5402d3-aac7-4eb6-ae68-9800e1b3d313&img_etag=%224eedf86977cc47ab9ee7e9de4376f2bf%22&image_assets=false&size=3842" alt="Animaux 6"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Affiches -->
+    <section id="affiches">
+        <h2>Affiches & Designs</h2>
+        <div class="gallery">
+            <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/TsLCb6f4qSFm9/resources/acfb13b7-7c01-4f79-8178-52ba5f23ac70-sans_titre_j?asset_id=ffbd5bf5-8ac5-41ad-8533-9db9bc86e6bf&img_etag=%2277a5d03151354fa59cb475144e2091b5%22&image_assets=false&size=3619" alt="Affiche 1"></div>
+            <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/TsLCb6f4qSFm9/resources/945eca66-8f51-4518-b083-9a4deef4212a-sans_titre_p?asset_id=39680d36-8118-4471-ad20-b7468c9f1182&img_etag=%22eeeeb9d9b9fc4f429c0fdc402550bc96%22&image_assets=false&size=3621" alt="Affiche 4"></div>
+            <div class="gallery-item"><img src="https://new.express.adobe.com/webpage/TsLCb6f4qSFm9/resources/f460d6a6-cb32-4607-a459-fcb01f112b17-sans_titre_p?asset_id=a36102ab-a97d-465f-b265-09bf4f494be0&img_etag=%2209b97383ee9c4e9492c023ea0af1de5e%22&image_assets=false&size=3621" alt="Affiche 5"></div>
+           
+        </div>
+    </section>
+
+    <!-- Sites -->
+    <section id="videos">
+        <h2>Vidéos</h2>
+        <div class="gallery video-gallery">
+            <div class="video-card">
+                <div class="gallery-item">
+                    <img src="https://new.express.adobe.com/webpage/TsLCb6f4qSFm9/resources/460d592e-6f46-4709-b03d-f3364bc2a697-img_1464_jpe?asset_id=fbc2b660-d44a-43b5-bf01-797bfc0d73ca&img_etag=%224c7d5492629b4f669fc4c61db130438a%22&image_assets=false&size=1024" alt="Vidéo 1">
+                </div>
+                <a class="video-btn" href="https://www.youtube.com/channel/UC_sBheo_TxHa7WUK301RWgg" target="_blank" rel="noopener">Mon youtube</a>
+            </div>
+        </div>
+    </section>
+    <!-- Sites Web -->
+    <section id="sites">
+        <h2>Sites Web</h2>
+        <div class="gallery">
+            <div class="site-card">
+                <div class="gallery-item">
+                    <img src="" alt="Site exemple">
+                </div>
+                <a class="site-btn" href="#">Voir le projet</a>
+                <a class="site-btn" href="#">Visiter le site</a>
+            </div>
+        </div>
+    </section>
+        </div>
+    </section>
+   
+        </div>
+    </section>
+
+    <section class="gallery-section" id="galerie">
+        <div class="container">
+            <h2 class="section-title">Ils m'ont fait confiance</h2>
+            <p class="intro">Voici quelques partenaires, et projets avec lesquels j'ai eu le plaisir de collaborer. Merci pour leur confiance.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://new.express.adobe.com/webpage/TsLCb6f4qSFm9/resources/e45fd4a4-fea1-40b0-a45d-0b1214d9f3fb-img_3819_jpe?asset_id=e2272aa5-a94f-4918-8cc9-6dacd4b3c8b3&img_etag=%22b8219aaf8a364117a2debb7e04ea703c%22&image_assets=false&size=3370" alt="Image 1">
+                    <p class="gallery-caption">Client local fidèle</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://new.express.adobe.com/webpage/TsLCb6f4qSFm9/resources/a2a19abf-dd61-440f-962d-76842d75dfa0-img_3818_jpe?asset_id=3c54c10f-2797-428f-957a-bc485fb86d2d&img_etag=%2289e0115f708345b689951606d9b13cdc%22&image_assets=false&size=3842" alt="Image 2">
+                    <p class="gallery-caption">Collaboration créative réussie</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://new.express.adobe.com/webpage/TsLCb6f4qSFm9/resources/933f6cfd-a871-474e-b14e-c208e0b54444-dsc_1199_jpe?asset_id=5cbe81ee-a407-4568-8035-535996f58b6e&img_etag=%22435d60eb4b3247e38e09b82a5bec5549%22&image_assets=false&size=3842" alt="Image 3">
+                    <p class="gallery-caption">Projet de marque</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="contact">
+            <h2><strong>Contact</h2>
+            <p><strong>Email :</strong> lchiron@outlook.com</p>
+            
+            <p><strong>Téléphone :</strong> 06-76-82-38-05</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Louis Chiron - Tous droits réservés</p>
+    </footer>
+
+</body>
+</html>
